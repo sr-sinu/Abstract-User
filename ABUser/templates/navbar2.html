@@ -1,0 +1,36 @@
+{% load static %}
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark" >
+    <link rel="stylesheet" type="text/css" href="">
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'image/qlogo.png'%}" style="flex: border-box; "; height="50;"/>
+    </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url 'welcome' %}">
+                <img src="{% static 'image/home.png'%}" style="flex: border-box; padding-right: 70px"; height="30;"/>
+            </a>
+        </li>
+
+
+
+        <li class="nav-item">
+
+        </li>
+    </ul>
+  </div>
+
+    <div>
+        {% if user.is_authenticated %}
+                <p><a class="btn btn-primary" href="{% url 'logout' %}">Hi {{ user.username }}! | Log Out</a></p>
+                {% else %}
+                <a style="padding-right: 10px ; margin-right: 20px;" class="btn btn-primary" href="{% url 'login' %}" role="button">Log In</a>
+                <a style="padding-right: 10px; " class="btn btn-success" href="{% url 'signup' %}" role="button">Sign Up</a>
+                {% endif %}
+    </div>
+</nav>

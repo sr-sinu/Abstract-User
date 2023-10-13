@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<head>
+    {% block title %}Answers{% endblock %}
+</head>
+
+
+
+{% block content %}
+            <h1 style="text-align: center; font-size: 40px; font-family:'Arial Black'; padding: 50px; color: blue">All Questions </h1>
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Sr. No.:</th>
+            <th scope="col">Answers:</th>
+            <th scope="col">Answer Description</th>
+        </tr>
+    </thead>
+        <tbody>
+        {% for s in ans %}
+            <tr>
+            <td>{{ s.answer_id }}</td>
+            <td>{{ s.answer }} </br>
+                Created By : {{s.answered_by }} </br>
+                Created On - {{ s.created_date }}</td>
+            <td style="text-align: center">
+{#            <form method="post" style="height: 10px; width: 100px; margin: auto; padding: 10px;" class=" border border-0" action="{% url 'up_ans' %}">#}
+{#            {% csrf_token %}#}
+{#                <input name="a_id" type="hidden" value="{{ s.answer_id }}"/>#}
+{#                <button class="btn btn-success" name="button" type="submit" value="update">Update</button>#}
+{#            </form>#}
+            {{ s.answer_desc }}
+            {% endfor %}
+        </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

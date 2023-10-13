@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+<head>
+    {% block title %}Ask Question{% endblock %}
+</head>
+
+{% block content %}
+    <form method="post" action="{% url 'create_ques' %}" style="margin-top: 100px">
+    {% csrf_token %}
+        {{ msg }}
+        <div class="form-group">
+        <label>Question :</label>
+            {{ form.Qname }}
+            {{ form.Qname.errors }}
+        <label>Question Description:</label>
+            {{ form.Qdesc }}
+            {{ form.Qdesc.errors }}
+        <label>Code Block Description :</label>
+            {{ form.Qcode }}
+            {{ form.Qcode.errors }}
+        <button class="btn btn-primary" type="submit">Submit Question</button>
+        </div>
+    </form>
+{% endblock%}
