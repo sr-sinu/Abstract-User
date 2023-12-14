@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+<head>
+    {% block title %}Answer{% endblock %}
+</head>
+
+{% block content %}
+    <div style="margin-top: 60px; text-align: center;">
+    <label>Question :</label></br>
+            {{ qObj.question }} </br>
+        <label>Question Description:</label></br>
+            {{ qObj.question_desc }} </br>
+            <label>Code Block Description :</label> </br>
+            {{ qObj.Qcode }} </br>
+    </div>
+        <form method="post" action="{% url 'update' %}" style="width: 300px" >
+    {% csrf_token %}
+        {{ msg }}
+        <div class="form-group">
+        <label>Answer :</label>
+            {{ form.Aname }}
+            {{ form.Aname.errors }}
+        <label>Answer Description:</label>
+            {{ form.Adesc }}
+            {{ form.Adesc.errors }}
+        <label>Code Block Description :</label>
+            {{ form.Acode }}
+            {{ form.Acode.errors }}
+        <button style="margin-top: 20px;" class="btn btn-primary" type="submit">Submit Answer</button>
+        </div>
+    </form>
+
+
+{#  <form action="{% url 'ans'%}">#}
+{#        {% csrf_token %}#}
+{#        <input name="q_id" type="hidden" value="{{ qObj.question_id }}"/>#}
+{#        <input style="margin-top: 20px;" class="btn btn-success" type="submit" name="button" value="show answer">#}
+{#    </form>#}
+<a href="/user/showans/{{ qObj.question_id }}/">Show Ans</a>
+
+{% endblock%}
