@@ -90,21 +90,15 @@ class Update_answer(LoginRequiredMixin, View):
             anscnt = qobj.answersCount
             anscnt += 1
             Questions.objects.filter(question_id=qid).update(answersCount=anscnt)
-            # form = SendMailForm(request.POST)
-            # if form.is_valid():
-            #     subject = form.cleaned_data['subject']
-            #     msg = form.cleaned_data['message']
-            #     mail = form.cleaned_data['mailid']
-            #     res = send_mail(subject, msg, "satya.gagan.n@gmail.com", [mail])
-            return render(request, "ans&upd_question.html", {"form": forms, 'msg': 'Answer Created succc.....'})
+            obj = Answers.objects.filter(question_id=qid)
+            return render(request, 'showanswer.html', {'ans': obj})
+            # return render(request, "ans&upd_question.html", {'qObj': qobj, "form": CreateAnswerForm(), 'msg': 'Answer Created succc.....'})
         else:
             return render(request, "ans&upd_question.html", {"form": forms, 'msg': 'something is wrong'})
 
 
 class ShowAns(LoginRequiredMixin, View):
     def get(self, request, qid):
-        #Qid = request.POST.get(qid)
-        #print(Qid)
         obj = Answers.objects.filter(question_id=qid)
         return render(request, 'showanswer.html', {'ans': obj})
 
@@ -118,8 +112,7 @@ def updateAns(request):
 def login_view(request):
     if request.method == 'GET':
         form = LoginForm(request.POST)
-        return render(request, 'registration/login.html',{'form':form})
-    
+        return render(request, 'registration/login.html',{'form':form})  
     elif request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -133,13 +126,13 @@ def login_view(request):
                 #handling login massage
                 message = 'You are sucessfully login'
                 # Redirect to the home page
-                return render(request, 'home.html', {'msg': message})  # Replace 'home' with the name of your home URL pattern
+                return render(request, 'home.html', {'msg': message})
             else:
                 # Handle invalid login credentials
                 error_message = "Invalid username or password."
                 return render(request, 'registration/login.html', {'form': form, 'message': error_message})
-    # Rest of your view logic for GET request
     return render(request, 'registration/login.html')
+
 
 def logout_view(request):
     logout(request)
